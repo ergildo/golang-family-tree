@@ -31,7 +31,7 @@ func (p PersonController) Add(ctx *gin.Context) {
 	if err := ctx.ShouldBindJSON(&person); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 	}
-	if err := p.service.Add(person); err != nil {
+	if err := p.service.Add(ctx, person); err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 	}
 	ctx.JSON(http.StatusOK, person)
@@ -45,7 +45,7 @@ func (p PersonController) FindAscendantsById(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	ascendants, err := p.service.FindAscendantsById(id)
+	ascendants, err := p.service.FindAscendantsById(ctx, id)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
@@ -55,7 +55,7 @@ func (p PersonController) FindAscendantsById(ctx *gin.Context) {
 
 func (p PersonController) FindAll(ctx *gin.Context) {
 	withContext(ctx)
-	people, err := p.service.FindAll()
+	people, err := p.service.FindAll(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 	}
