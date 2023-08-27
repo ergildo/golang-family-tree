@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  postgresql-db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes: 
+      - postgresql-db:/var/lib/postgresql/data
+
+  golang-family-tree-api:
+    image: golang-family-tree-api:latest
+    container_name: golang-family-tree-api
+    hostname: golang-family-tree-api
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgresql-db
+    environment:
+      - DB_HOST=postgresql-db
+      - DB_NAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_MAX_CONNECTIONS=5
+volumes:
+  postgresql-db:
+    driver: local
+
