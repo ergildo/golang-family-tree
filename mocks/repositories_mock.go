@@ -5,6 +5,8 @@
 package mocks
 
 import (
+	context "context"
+	model "golang-family-tree/internal/domain/model"
 	entity "golang-family-tree/internal/repository/entity"
 	reflect "reflect"
 
@@ -34,16 +36,91 @@ func (m *MockPersonRepository) EXPECT() *MockPersonRepositoryMockRecorder {
 	return m.recorder
 }
 
-// Save mocks base method.
-func (m *MockPersonRepository) Save(person entity.Person) error {
+// AddRelationship mocks base method.
+func (m *MockPersonRepository) AddRelationship(ctx context.Context, person entity.Relationship) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Save", person)
+	ret := m.ctrl.Call(m, "AddRelationship", ctx, person)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// Save indicates an expected call of Save.
-func (mr *MockPersonRepositoryMockRecorder) Save(person interface{}) *gomock.Call {
+// AddRelationship indicates an expected call of AddRelationship.
+func (mr *MockPersonRepositoryMockRecorder) AddRelationship(ctx, person interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Save", reflect.TypeOf((*MockPersonRepository)(nil).Save), person)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddRelationship", reflect.TypeOf((*MockPersonRepository)(nil).AddRelationship), ctx, person)
+}
+
+// FindAscendantsById mocks base method.
+func (m *MockPersonRepository) FindAscendantsById(ctx context.Context, id int64) ([]*model.Ascendancy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindAscendantsById", ctx, id)
+	ret0, _ := ret[0].([]*model.Ascendancy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindAscendantsById indicates an expected call of FindAscendantsById.
+func (mr *MockPersonRepositoryMockRecorder) FindAscendantsById(ctx, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindAscendantsById", reflect.TypeOf((*MockPersonRepository)(nil).FindAscendantsById), ctx, id)
+}
+
+// FindBAll mocks base method.
+func (m *MockPersonRepository) FindBAll(ctx context.Context) ([]*entity.Person, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindBAll", ctx)
+	ret0, _ := ret[0].([]*entity.Person)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindBAll indicates an expected call of FindBAll.
+func (mr *MockPersonRepositoryMockRecorder) FindBAll(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindBAll", reflect.TypeOf((*MockPersonRepository)(nil).FindBAll), ctx)
+}
+
+// FindById mocks base method.
+func (m *MockPersonRepository) FindById(ctx context.Context, id int64) (*entity.Person, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindById", ctx, id)
+	ret0, _ := ret[0].(*entity.Person)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindById indicates an expected call of FindById.
+func (mr *MockPersonRepositoryMockRecorder) FindById(ctx, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindById", reflect.TypeOf((*MockPersonRepository)(nil).FindById), ctx, id)
+}
+
+// FindParents mocks base method.
+func (m *MockPersonRepository) FindParents(ctx context.Context, id int64) ([]*model.Parent, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindParents", ctx, id)
+	ret0, _ := ret[0].([]*model.Parent)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindParents indicates an expected call of FindParents.
+func (mr *MockPersonRepositoryMockRecorder) FindParents(ctx, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindParents", reflect.TypeOf((*MockPersonRepository)(nil).FindParents), ctx, id)
+}
+
+// Save mocks base method.
+func (m *MockPersonRepository) Save(ctx context.Context, person entity.Person) (*entity.Person, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Save", ctx, person)
+	ret0, _ := ret[0].(*entity.Person)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Save indicates an expected call of Save.
+func (mr *MockPersonRepositoryMockRecorder) Save(ctx, person interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Save", reflect.TypeOf((*MockPersonRepository)(nil).Save), ctx, person)
 }

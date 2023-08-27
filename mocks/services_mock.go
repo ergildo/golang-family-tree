@@ -5,7 +5,9 @@
 package mocks
 
 import (
+	context "context"
 	model "golang-family-tree/internal/domain/model"
+	entity "golang-family-tree/internal/repository/entity"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
@@ -35,15 +37,45 @@ func (m *MockPersonService) EXPECT() *MockPersonServiceMockRecorder {
 }
 
 // Add mocks base method.
-func (m *MockPersonService) Add(person model.Person) error {
+func (m *MockPersonService) Add(ctx context.Context, person model.Person) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Add", person)
+	ret := m.ctrl.Call(m, "Add", ctx, person)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Add indicates an expected call of Add.
-func (mr *MockPersonServiceMockRecorder) Add(person interface{}) *gomock.Call {
+func (mr *MockPersonServiceMockRecorder) Add(ctx, person interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Add", reflect.TypeOf((*MockPersonService)(nil).Add), person)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Add", reflect.TypeOf((*MockPersonService)(nil).Add), ctx, person)
+}
+
+// FindAll mocks base method.
+func (m *MockPersonService) FindAll(ctx context.Context) ([]*entity.Person, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindAll", ctx)
+	ret0, _ := ret[0].([]*entity.Person)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindAll indicates an expected call of FindAll.
+func (mr *MockPersonServiceMockRecorder) FindAll(ctx interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindAll", reflect.TypeOf((*MockPersonService)(nil).FindAll), ctx)
+}
+
+// FindAscendantsById mocks base method.
+func (m *MockPersonService) FindAscendantsById(ctx context.Context, id int64) ([]*model.Ascendancy, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "FindAscendantsById", ctx, id)
+	ret0, _ := ret[0].([]*model.Ascendancy)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// FindAscendantsById indicates an expected call of FindAscendantsById.
+func (mr *MockPersonServiceMockRecorder) FindAscendantsById(ctx, id interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindAscendantsById", reflect.TypeOf((*MockPersonService)(nil).FindAscendantsById), ctx, id)
 }
