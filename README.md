@@ -1,6 +1,7 @@
 ## Árvore genealógica
 
 ### O Problema
+
 Nesse desafio deve-se criar uma API que expõe um endpoint HTTP<br/>
 para a criação e manipulação de entidades Person.<br/>
 ``` 
@@ -37,12 +38,9 @@ Dados de entrada:
 
 ``` 
 {
-"name": "string"
-}
-e relações de paternidade.
-{
-"parent": "integer",
-"children": [integers]
+    "name":"string",
+    "parent": 1,
+    "children": [1, 2]
 }
 
 ```
@@ -83,6 +81,7 @@ O campo depth representa o BACON'S NUMBER, mencionado como extras no desafio.
 ![Architecture](architecture-diagram.png "Arquitetura")
 
 ## Pre-requisitos
+
 Golang  1.20.3<br/>
 GoMock v1.6.0 <br/>
 Docker 24.0.2<br/>
@@ -91,12 +90,15 @@ GNU Make 3.81<br/>
 Postgresql 14.1<br/>
 
 ## Tecnologias
+
 Golang, Golang-migrate, GoMock, Testify, Logrus<br/>
-Docker, git, GNU Make, Posgresql<br/>
+Docker, Docker Compose, git, GNU Make, Posgresql<br/>
 
 ## Instalaçao
 Conforme mencionado no desafio, a aplicacao rodará em um docker container, por meio um docker compose contendo todas as configuraçoes necessárias. 
+
 ### Download
+
 Para clonar o repositorio, execute o seguinte comando:
 
 ``` 
@@ -104,8 +106,8 @@ git clone https://github.com/ergildo/golang-family-tree.git && cd golang-family-
 
 ```
 
-
 ### Build
+
 Para buildar a imagem docker, execute o seguinte comando:
 
 ``` 
@@ -114,6 +116,7 @@ docker build --tag golang-family-tree-api:latest .
 ```
 
 ### Rodar a aplicaçao
+
 Para rodar a aplicacao, execute o seguinte comando:
 
 ``` 
@@ -122,9 +125,11 @@ docker-compose up -d
 ```
 
 #### Observçao
+
 Certifique-se que a imagem docker golang-family-tree-api:latest foi gerada corretamente.
 
 ### Migração de banco de dados
+
 A migraçao de dados será executada automáticamente ao rodar a aplicacao. Além de criar o esquema de banco de dados, será inserido uma carga inicial as seguintes pessoas: 
 
 Sony, Martin, Anastasia, Ellen, Oprah, Mike, Phoebe, Ursula, Eric, Ariel, Duny, Bruce, Jaqueline e Melody .
@@ -132,7 +137,9 @@ Sony, Martin, Anastasia, Ellen, Oprah, Mike, Phoebe, Ursula, Eric, Ariel, Duny, 
 Conforme árvore genealógica mencionado no desafio.
 
 ### API
+
 #### Consulta de ascendentes
+
 GET<br/>
 /api/v1/person/ascendants/{id}
 
@@ -164,6 +171,7 @@ Exemplo de resposta:
 ```
 
 #### Listar pessoas
+
 GET<br/>
 /api/v1/person
 
@@ -187,6 +195,7 @@ Exemplo de resposta:
 
 
 #### Adicionar pessoa
+
 POST<br/>
 /api/v1/person<br/>
 
@@ -203,6 +212,7 @@ Examplo de requisiçao:
 ```
 
 ## Testes
+
 Para rodar os tests, execute o seguinte comando:
 
 ``` 
@@ -211,6 +221,7 @@ go test ./internal/...
 ```
 
 ## Contatos
+
 #### Dúvidas?
 
 **e-mail:** ergildo@gmail
