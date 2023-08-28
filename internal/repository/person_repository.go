@@ -37,7 +37,7 @@ func (p PersonRepositoryImpl) FindById(ctx context.Context, id int64) (*entity.P
 }
 
 func (p PersonRepositoryImpl) FindBAll(ctx context.Context) ([]*entity.Person, error) {
-	query := "select id, name, gender, fatherId, motherId from person"
+	query := "select id, name from person"
 	stm, err := p.db.PrepareContext(ctx, query)
 	if err != nil {
 		return nil, fmt.Errorf("error when preparing query: %w", err)
@@ -159,22 +159,4 @@ func (p PersonRepositoryImpl) FindParents(ctx context.Context, id int64) ([]*mod
 		parents = append(parents, &parent)
 	}
 	return parents, nil
-}
-
-func (p PersonRepositoryImpl) findByUUID(ctx context.Context, UUID string) (*entity.Person, error) {
-
-	query := "select id, name from person where uuid =$1"
-	stm, err := p.db.PrepareContext(ctx, query)
-
-	if err != nil {
-		return nil, fmt.Errorf("could not prepare query: %w", err)
-	}
-	defer stm.Close()
-	row := stm.QueryRowContext(ctx, UUID)
-	if row.Err() != nil {
-		return nil, fmt.Errorf("could not prepare query:%w", err)
-	}
-	var person entity.Person
-	row.Scan(&person.Id, &person.Name)
-	return &person, nil
 }
