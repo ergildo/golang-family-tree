@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"context"
 	"golang-family-tree/internal/domain/model"
 	"golang-family-tree/internal/domain/service"
 	"net/http"
@@ -26,7 +25,6 @@ func (p PersonController) Routes(group *gin.RouterGroup) {
 }
 
 func (p PersonController) Add(ctx *gin.Context) {
-	//TODO: improve error handling
 	var person model.Person
 	if err := ctx.ShouldBindJSON(&person); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -34,12 +32,11 @@ func (p PersonController) Add(ctx *gin.Context) {
 	if err := p.service.Add(ctx, person); err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 	}
-	ctx.JSON(http.StatusOK, person)
+	ctx.Status(http.StatusCreated)
 
 }
 
 func (p PersonController) FindAscendantsById(ctx *gin.Context) {
-	//TODO: improve error handling
 	id, err := strconv.ParseInt(ctx.Param("id"), 10, 64)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -54,7 +51,6 @@ func (p PersonController) FindAscendantsById(ctx *gin.Context) {
 }
 
 func (p PersonController) FindAll(ctx *gin.Context) {
-	withContext(ctx)
 	people, err := p.service.FindAll(ctx)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
@@ -64,8 +60,4 @@ func (p PersonController) FindAll(ctx *gin.Context) {
 
 func errorResponse(err error) gin.H {
 	return gin.H{"error": err.Error()}
-}
-
-func withContext(ctx context.Context) {
-
 }
