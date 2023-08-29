@@ -216,7 +216,7 @@ Examplo de requisiçao:
 Para rodar os tests, execute o seguinte comando:
 
 ``` 
-go test ./internal/...
+go test ./internal/domain/service/... -v -cover
 
 ```
 
