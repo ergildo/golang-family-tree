@@ -41,7 +41,7 @@ func (p PersonServiceImpl) Add(ctx context.Context, person model.Person) error {
 			ParentId: person.Parent,
 			ChildId:  savedPerson.Id,
 		}
-		p.repository.AddRelationship(ctx, relationship)
+		err := p.repository.AddRelationship(ctx, relationship)
 		if err != nil {
 			err := fmt.Errorf("could not add parent relationship. %v", err)
 			log.Error(err)
@@ -50,12 +50,13 @@ func (p PersonServiceImpl) Add(ctx context.Context, person model.Person) error {
 	}
 	//Add child relationships
 	for _, childId := range person.Children {
-		parents, err := p.repository.FindParents(ctx, childId)
 		//Validating number of parents, a child should not have more than 2 parents
+		parents, err := p.repository.FindParents(ctx, childId)
+		if err != nil {
+			log.Warningf("could not find parents for child %d. %v", childId, err)
+		}
 		if err == nil && len(parents) == 2 {
-			if err != nil {
-				log.Error(err)
-			}
+
 			return fmt.Errorf("could not add child relationship. child %d already has 2 parents", childId)
 		}
 		relationship := entity.Relationship{

@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 
+	_ "github.com/lib/pq"
 	log "github.com/sirupsen/logrus"
 )
 
