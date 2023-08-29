@@ -22,7 +22,7 @@ mostrados acima.<br/>
 A API deve prover também um endpoint que retorna a árvore genealógica de um certo indivíduo contendo todos os
 ascendentes possíveis até o seu nível. Por exemplo, suponha a seguinte família:
 
-![Árvore genealógica](family-tree.png "Árvore genealógica")
+![Árvore genealógica](docs/family-tree.png "Árvore genealógica")
 
 Se procurarmos pelo identificador de Bruce, a API deve retornar:<br/>
 Bruce, Mike, Sonny, Phoebe, Anastasiae Martin. <br/>
@@ -40,7 +40,7 @@ filhos. Essa abordagem permitiria ligar uma pessoa a vários pais, entretanto, G
 uma pessoa tenha mais de que dois pais. Portanto, adicionaremos validações para garantir que uma pessoa tenha no máximo
 dois pais.
 
-![Modelo Dados](data-model-diagram.png "Modelo de Dados")
+![Modelo Dados](docs/data-model-diagram.png "Modelo de Dados")
 
 Dados de entrada:
 
@@ -87,7 +87,7 @@ O campo depth representa o BACON'S NUMBER, mencionado como extras no desafio.
 
 ## Arquiterura
 
-![Architecture](architecture-diagram.png "Arquitetura")
+![Architecture](docs/architecture-diagram.png "Arquitetura")
 
 ## Pre-requisitos
 
@@ -147,6 +147,9 @@ inserido uma carga inicial as seguintes pessoas:
 Sony, Martin, Anastasia, Ellen, Oprah, Mike, Phoebe, Ursula, Eric, Ariel, Duny, Bruce, Jaqueline e Melody .
 
 Conforme árvore genealógica mencionado no desafio.
+
+### Como usar a aplicaçao
+No [Postman](https://www.postman.com/downloads/), importe o arquivo [tests/data/family-tree.postman_collection.json](tests/data/family-tree.postman_collection.json). Esse arquivo contém coleçao com todos enpoints da api.
 
 ### API
 
@@ -215,9 +218,9 @@ Examplo de requisiçao:
 
 ``` 
 {
-"name":"Ticio",
-"parent": 13,
-"children": [15, 16]
+    "name":"Ticio",
+    "parent": 5,
+    "children": [10]
 }
 ```
 
