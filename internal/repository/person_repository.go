@@ -14,22 +14,8 @@ func NewPersonRepository(db *sql.DB) PersonRepository {
 	return PersonRepositoryImpl{db: db}
 }
 
-func (p *PersonRepositoryImpl) BeginTx(ctx context.Context) (*PersonRepositoryImpl, error) {
-	tx, err := p.db.BeginTx(ctx, nil)
-	if err != nil {
-		return nil, err
-	}
-	p.tx = tx
-	return p, nil
-}
-
-func (p PersonRepositoryImpl) Commit(ctx context.Context) error {
-	return p.tx.Commit()
-}
-
 type PersonRepositoryImpl struct {
 	db *sql.DB
-	tx *sql.Tx
 }
 
 func (p PersonRepositoryImpl) FindById(ctx context.Context, id int64) (*entity.Person, error) {
