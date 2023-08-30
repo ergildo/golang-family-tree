@@ -128,16 +128,21 @@ docker build --tag golang-family-tree-api:latest .
 
 ### Rodar a aplicaçao
 
-Para rodar a aplicacao, execute o seguinte comando:
+Para rodar a aplicaçao, execute o seguinte comando:
 
 ``` 
 docker-compose up -d
 
 ```
 
+No seu navegador web, acesse a url [http://localhost:8080/ping](http://localhost:8080/ping), caso o retorno seja "pong" siginifica que a aplicacao subiu com sucesso.
+
 #### Observçao
 
 Certifique-se que a imagem docker golang-family-tree-api:latest foi gerada corretamente.
+
+Eu tive alguns problemas para rodar aplicação em MacOS. A primeira vez que docker-compose era iniciado a inicializaçao da api falhava.
+Caso isso aconteça, excute o docker-compose up -d novamente, isso deve resolver o problema. 
 
 ### Migração de banco de dados
 
